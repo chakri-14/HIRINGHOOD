@@ -1,0 +1,256 @@
+@use './variables' as vars;
+
+:root {
+  --bg-color: #{vars.$light-bg};
+  --text-color: #{vars.$light-text};
+  --border-color: #{vars.$light-border};
+  --shadow-color: #{vars.$light-shadow};
+  --hover-bg: #{vars.$light-hover};
+  --accent-color: #{vars.$light-accent};
+  --gradient-bg: #{vars.$light-gradient};
+}
+
+[data-theme='dark'] {
+  --bg-color: #{vars.$dark-bg};
+  --text-color: #{vars.$dark-text};
+  --border-color: #{vars.$dark-border};
+  --shadow-color: #{vars.$dark-shadow};
+  --hover-bg: #{vars.$dark-hover};
+  --accent-color: #{vars.$dark-accent};
+  --gradient-bg: #{vars.$dark-gradient};
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--gradient-bg);
+  color: var(--text-color);
+  font-family: vars.$font-family;
+  transition: vars.$transition;
+  min-height: 100vh;
+}
+
+.task-manager {
+  padding: vars.$spacing-xl;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: vars.$spacing-xl;
+    padding: vars.$spacing-md;
+    background: var(--bg-color);
+    border-radius: vars.$border-radius;
+    box-shadow: 0 4px 6px var(--shadow-color);
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.task-list {
+  display: grid;
+  gap: vars.$spacing-lg;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.task-item {
+  border: 1px solid var(--border-color);
+  padding: vars.$spacing-md;
+  border-radius: vars.$border-radius;
+  cursor: pointer;
+  transition: vars.$transition;
+  background: var(--bg-color);
+  box-shadow: 0 4px 6px var(--shadow-color);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+    background: var(--hover-bg);
+  }
+
+  &.high { border-left: 5px solid vars.$high-priority; }
+  &.medium { border-left: 5px solid vars.$medium-priority; }
+  &.low { border-left: 5px solid vars.$low-priority; }
+
+  h3 {
+    margin: 0 0 vars.$spacing-sm 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+
+  p {
+    margin: vars.$spacing-sm 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.9;
+  }
+
+  .tags {
+    margin-top: vars.$spacing-sm;
+    
+    .tag {
+      display: inline-block;
+      background: var(--accent-color);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      margin-right: 6px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.filter-bar {
+  margin: vars.$spacing-xl 0;
+  display: flex;
+  gap: vars.$spacing-lg;
+  flex-wrap: wrap;
+  padding: vars.$spacing-md;
+  background: var(--bg-color);
+  border-radius: vars.$border-radius;
+  box-shadow: 0 4px 6px var(--shadow-color);
+
+  .MuiTextField-root,
+  .MuiSelect-root {
+    background: var(--hover-bg);
+    border-radius: vars.$border-radius;
+    
+    .MuiInputBase-input {
+      color: var(--text-color);
+      padding: vars.$spacing-sm;
+    }
+    
+    .MuiInputLabel-root {
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    
+    .MuiOutlinedInput-notchedOutline {
+      border-color: var(--border-color);
+    }
+  }
+}
+
+.task-details, .task-edit {
+  max-width: 900px;
+  margin: vars.$spacing-xl auto;
+  padding: vars.$spacing-lg;
+  background: var(--bg-color);
+  border-radius: vars.$border-radius;
+  box-shadow: 0 4px 6px var(--shadow-color);
+
+  h1 {
+    margin-bottom: vars.$spacing-lg;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .task-info {
+    p {
+      margin: vars.$spacing-md 0;
+      font-size: 1rem;
+      color: var(--text-color);
+      
+      strong {
+        display: inline-block;
+        width: 120px;
+        font-weight: 600;
+        color: var(--accent-color);
+      }
+    }
+  }
+
+  .task-actions {
+    margin-top: vars.$spacing-lg;
+    display: flex;
+    gap: vars.$spacing-md;
+
+    .MuiButton-root {
+      padding: vars.$spacing-sm vars.$spacing-md;
+      font-weight: 600;
+      text-transform: none;
+      border-radius: vars.$border-radius;
+      transition: vars.$transition;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px var(--shadow-color);
+      }
+    }
+  }
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-md;
+
+  .MuiTextField-root,
+  .MuiSelect-root {
+    background: var(--hover-bg);
+    border-radius: vars.$border-radius;
+    
+    .MuiInputBase-input {
+      color: var(--text-color);
+      padding: vars.$spacing-sm;
+    }
+    
+    .MuiInputLabel-root {
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    
+    .MuiOutlinedInput-notchedOutline {
+      border-color: var(--border-color);
+    }
+  }
+
+  .MuiButton-root {
+    padding: vars.$spacing-sm vars.$spacing-md;
+    font-weight: 600;
+    text-transform: none;
+    background: var(--accent-color);
+    color: white;
+    
+    &:hover {
+      background: darken(vars.$light-accent, 10%);
+      transform: translateY(-2px);
+    }
+    
+    &[data-theme='dark'] {
+      &:hover {
+        background: darken(vars.$dark-accent, 10%);
+      }
+    }
+  }
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  
+  .MuiSwitch-root {
+    .MuiSwitch-thumb {
+      background: var(--accent-color);
+    }
+    
+    .MuiSwitch-track {
+      background: var(--border-color);
+    }
+  }
+  
+  .MuiFormControlLabel-label {
+    color: var(--text-color);
+    font-weight: 500;
+  }
+}
